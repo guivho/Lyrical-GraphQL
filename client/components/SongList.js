@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo'
 class SongList extends Component {
 
 	renderSongs() {
-		const { loading, songs } = this.props.data
+		const { songs } = this.props.data
 		return songs.map(song => {
 			return (
 				<li className="collection-item" key={song.id}>
@@ -15,7 +15,6 @@ class SongList extends Component {
 		})
 	}
 	render() {
-		// console.log(this.props.data)
 		const { loading, songs } = this.props.data
 		if (loading) {
 			return <div>Loading...</div>
