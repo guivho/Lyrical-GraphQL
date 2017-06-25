@@ -4,19 +4,32 @@ import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
 import fetchSongs from '../queries/fetchSongs'
+import deleteSong from '../queries/deleteSong'
 
 class SongList extends Component {
 
+	onSongDelete(id) {
+		this.props.mutate({
+			variables: { id }
+		})
+			.then(() => this.props.data.refetch())
+	}
+
 	renderSongs() {
 		const { songs } = this.props.data
-		return songs.map(song => {
+		return songs.map(({ id, title }) => {
 			return (
-				<li className="collection-item" key={song.id}>
-					{song.title}
+				<li className="collection-item" key={id}>
+					{title}
+					<i className='material-icons'
+						onClick={() => this.onSongDelete(id)} >
+						delete
+					</i>
 				</li>
 			)
 		})
 	}
+
 	render() {
 		const { loading, songs } = this.props.data
 		if (loading) {
@@ -41,4 +54,6 @@ class SongList extends Component {
 	}
 }
 
-export default graphql(fetchSongs)(SongList)
+export default graphql(deleteSong)(
+	graphql(fetchSongs)(SongList)
+)
