@@ -5,6 +5,11 @@ export default gfq`
 		song(id: $id) {
 			id
 			title
+			lyrics {
+				id
+				content
+				likes
+			}
 		}
 	}
 `

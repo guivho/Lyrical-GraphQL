@@ -4,5 +4,11 @@
 }
 
 .material-icons {
-	cursor: pointer
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+.vote-box {
+	display: flex;
+	align-items: center;
 }
